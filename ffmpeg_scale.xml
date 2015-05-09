@@ -11,5 +11,9 @@
     <part value="scale=iw*${$#vscale}:ih*${$#vscale}" channel="$V"></part>
   </part>  
   </x-one>
-
+  
 </part>
+
+<part value="-ss $#vskip" before="#in1"></part>
+Skip first seconds in video
+<input type="text" id="vskip" /> 

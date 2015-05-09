@@ -1,6 +1,11 @@
 <part append-to="#ffmpeg_complex">
 
-  <x-one title="Scale video">
+  <part title="Change audio bitrate">
+    New bitrate: <input type="text" id="aresample" /> 8000 = 8Khz, 16000 = 16Khz, 44000 = $4Khz
+    <part value="aresample=${$#aresample}" channel="$A"></part>  
+  </part>
+
+  <x-one title="Scale video" id="onescalevideo">
   <part title="Scale video to new width">
     New width: <input type="text" id="vwidth" /> Height will be recomputed.
     <part value="scale=${$#vwidth}:-1" channel="$V"></part>
@@ -11,9 +16,46 @@
     <part value="scale=iw*${$#vscale}:ih*${$#vscale}" channel="$V"></part>
   </part>  
   </x-one>
+
+  </x-one>  
+  
+  <part title="Transpose (rotate) video" value="transpose=$V" channel="$V">
+    <x-one>
+      <part title="Clockwise 90" value="clock" channel="$V"></part>
+      <part title="Counter-Clockwise 90" value="cclock" channel="$V"></part>
+    </x-one>
+  </part>  
+
+  <part title="Flip video" value="$V" channel="$V">
+    <x-many>
+      <part title="Vertically" value="vflip" channel="$V"></part>
+      <part title="Horizontally" value="hflip" channel="$V"></part>
+    </x-many>
+  </part>
+
+  <part title="Crop video" value="crop=$#cropparams" channel="$V" before="#onescalevideo">
+     Crop parameters: <input type="text" id="cropparams" /> 
+     Examples:
+
+     <pre>
+       100:100               -- Crop the central input area with size 100x100
+       w=100:h=100:x=12:y=34 -- Crop area with size 100x100 at position (12,34)
+       2/3*in_w:2/3*in_h     -- Crop the input video central square
+     </pre>
+     More examples are <a target="_blank" href="https://ffmpeg.org/ffmpeg-filters.html#crop">here</a>.
+     
+
+  </part>  
   
 </part>
 
 <part value="-ss $#vskip" before="#in1"></part>
-Skip first seconds in video
-<input type="text" id="vskip" /> 
+Skip first seconds in source video <input type="text" id="vskip" /> 
+<br/>
+
+<part value="-t $#tlimit" before="#in1"></part>
+Read only N seconds from source video <input type="text" id="tlimit" /> 
+<br/>
+
+<part value="-t $#tlimitout" before="#outfilename"></part>
+Limit output video to N seconds <input type="text" id="tlimitout" /> 

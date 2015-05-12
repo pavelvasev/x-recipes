@@ -5,6 +5,20 @@
     <part value="aresample=${$#aresample}" channel="$A"></part>  
   </part>
 
+  <part title="Crop video" value="crop=$#cropparams" channel="$V" > <!-- before="#onescalevideo" -->
+     Crop parameters: <input type="text" id="cropparams" /> 
+     Examples:
+
+     <pre>
+       100:100               -- Crop the central input area with size 100x100
+       w=100:h=100:x=12:y=34 -- Crop area with size 100x100 at position (12,34)
+       2/3*in_w:2/3*in_h     -- Crop the input video central square
+     </pre>
+     More examples are <a target="_blank" href="https://ffmpeg.org/ffmpeg-filters.html#crop">here</a>.
+
+  </part>  
+  
+
   <x-one title="Scale video" id="onescalevideo">
   <part title="Scale video to new width">
     New width: <input type="text" id="vwidth" /> Height will be recomputed.
@@ -18,6 +32,19 @@
   </x-one>
 
   </x-one>  
+
+  <part title="Crop video after scale" value="crop=$#cropparams2" channel="$V">
+     Crop parameters: <input type="text" id="cropparams2" /> 
+     Examples:
+
+     <pre>
+       100:100               -- Crop the central input area with size 100x100
+       w=100:h=100:x=12:y=34 -- Crop area with size 100x100 at position (12,34)
+       2/3*in_w:2/3*in_h     -- Crop the input video central square
+     </pre>
+     More examples are <a target="_blank" href="https://ffmpeg.org/ffmpeg-filters.html#crop">here</a>.
+
+  </part>    
   
   <part title="Transpose (rotate) video" value="transpose=$V" channel="$V">
     <x-one>
@@ -33,19 +60,8 @@
     </x-many>
   </part>
 
-  <part title="Crop video" value="crop=$#cropparams" channel="$V" before="#onescalevideo">
-     Crop parameters: <input type="text" id="cropparams" /> 
-     Examples:
 
-     <pre>
-       100:100               -- Crop the central input area with size 100x100
-       w=100:h=100:x=12:y=34 -- Crop area with size 100x100 at position (12,34)
-       2/3*in_w:2/3*in_h     -- Crop the input video central square
-     </pre>
-     More examples are <a target="_blank" href="https://ffmpeg.org/ffmpeg-filters.html#crop">here</a>.
-     
-
-  </part>  
+  
   
 </part>
 

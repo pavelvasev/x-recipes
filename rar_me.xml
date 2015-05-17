@@ -3,5 +3,5 @@
 Как же хочется тут на маркдауне писать.
 ```
 Стандартный архив
-rar a -agYYYYMMDD-NN -m5 -s 
+rar a -agYYYYMMDD-MMHH -m5 -s 
 ```

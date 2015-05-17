@@ -2,10 +2,10 @@
 
   <part title="Change audio bitrate">
     New bitrate: <input type="text" id="aresample" /> 8000 = 8Khz, 16000 = 16Khz, 44000 = $4Khz
-    <part value="aresample=${$#aresample}" channel="$A"></part>  
+    <part xvalue="aresample=${$#aresample}" channel="$A"></part>  
   </part>
 
-  <part title="Crop video" value="crop=$#cropparams" channel="$V" > <!-- before="#onescalevideo" -->
+  <part title="Crop video" xvalue="crop=$#cropparams" channel="$V" > <!-- before="#onescalevideo" -->
      Crop parameters: <input type="text" id="cropparams" /> 
      Examples:
 
@@ -22,18 +22,18 @@
   <x-one title="Scale video" id="onescalevideo">
   <part title="Scale video to new width">
     New width: <input type="text" id="vwidth" /> Height will be recomputed.
-    <part value="scale=${$#vwidth}:-1" channel="$V"></part>
+    <part xvalue="scale=${$#vwidth}:-1" channel="$V"></part>
   </part>
 
   <part title="Scale video (relative)">
     Scale ratio: <input type="text" id="vscale" /> 2=twice larger, 0.1 = ten times smaller
-    <part value="scale=iw*${$#vscale}:ih*${$#vscale}" channel="$V"></part>
+    <part xvalue="scale=iw*${$#vscale}:ih*${$#vscale}" channel="$V"></part>
   </part>  
   </x-one>
 
   </x-one>  
 
-  <part title="Crop video after scale" value="crop=$#cropparams2" channel="$V">
+  <part title="Crop video after scale" xvalue="crop=$#cropparams2" channel="$V">
      Crop parameters: <input type="text" id="cropparams2" /> 
      Examples:
 
@@ -46,17 +46,17 @@
 
   </part>    
   
-  <part title="Transpose (rotate) video" value="transpose=$V" channel="$V">
+  <part title="Transpose (rotate) video" xvalue="transpose=$V" channel="$V">
     <x-one>
-      <part title="Clockwise 90" value="clock" channel="$V"></part>
-      <part title="Counter-Clockwise 90" value="cclock" channel="$V"></part>
+      <part title="Clockwise 90" xvalue="clock" channel="$V"></part>
+      <part title="Counter-Clockwise 90" xvalue="cclock" channel="$V"></part>
     </x-one>
   </part>  
 
-  <part title="Flip video" value="$V" channel="$V">
+  <part title="Flip video" xvalue="$V" channel="$V">
     <x-many>
-      <part title="Vertically" value="vflip" channel="$V"></part>
-      <part title="Horizontally" value="hflip" channel="$V"></part>
+      <part title="Vertically" xvalue="vflip" channel="$V"></part>
+      <part title="Horizontally" xvalue="hflip" channel="$V"></part>
     </x-many>
   </part>
 
@@ -65,13 +65,13 @@
   
 </part>
 
-<part value="-ss $#vskip" before="#in1"></part>
+<part xvalue="-ss $#vskip" before="#in1"></part>
 Skip first seconds in source video <input type="text" id="vskip" /> 
 <br/>
 
-<part value="-t $#tlimit" before="#in1"></part>
+<part xvalue="-t $#tlimit" before="#in1"></part>
 Read only N seconds from source video <input type="text" id="tlimit" /> 
 <br/>
 
-<part value="-t $#tlimitout" before="#outfilename"></part>
+<part xvalue="-t $#tlimitout" before="#outfilename"></part>
 Limit output video to N seconds <input type="text" id="tlimitout" /> 
